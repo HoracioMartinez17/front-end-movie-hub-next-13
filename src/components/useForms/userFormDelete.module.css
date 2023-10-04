@@ -1,0 +1,62 @@
+.modal_container_user {
+    background: var(--color-background-main);
+    border-radius: 8px;
+  
+  }
+  
+  .modal_content_user {
+    text-align: center;
+  }
+  
+  .modal_content_user h2 {
+    padding: 12px 0;
+    font-size: 2rem;
+    color: #f5f4e8;
+    font-weight: 600;
+  
+  }
+  
+  .modal_content_user p {
+    padding-bottom: 5px;
+    font-size: 1.4rem;
+    color: #dafcc4;
+    font-weight: 600;
+  
+  }
+  
+  /* Estilos de los botones */
+  .button_container_user {
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirm_button_user,
+  .cancel_button_user {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm_button_user {
+    background-color: #e74c3c;
+    color: #f5f4e8;
+    font-size: 1.2rem;
+  }
+  
+  .confirm_button_user:hover {
+    background-color: #c0392b;
+  }
+  
+  .cancel_button_user {
+    background-color: #2f9304;
+    color: #f5f4e8;
+    font-size: 1.2rem;
+  }
+  
+  .cancel_button_user:hover {
+    background-color: #077107;
+  }
