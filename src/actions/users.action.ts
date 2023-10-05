@@ -1,5 +1,5 @@
 "use server"
-import {revalidateTag} from "next/cache";
+import {revalidateTag,revalidatePath} from "next/cache";
 import { GENRES_URL, MOVIES_URL, USER_URL } from "@/global/serverUrl";
 import {getAccessToken} from "@auth0/nextjs-auth0";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
@@ -21,6 +21,8 @@ export const createUserApi = async (user: UserProfile | undefined) => {
         revalidateTag("users")
         const data = await response.json()
         return data
+    }else {
+      revalidatePath('/')
     }
     }catch (error) {
         console.error('error in post request:', error);

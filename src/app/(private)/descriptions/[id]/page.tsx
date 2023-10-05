@@ -4,6 +4,7 @@ import DescriptionsCard from '@/components/descriptions/DescriptionsCard';
 import css from './descriptionPage.module.css'
 import {Suspense} from "react";
 import dynamic from "next/dynamic";
+import NotFoundPage from '@/components/page-not-found/NotFound';
 const CharacterList = dynamic(() => import ("@/components/descriptions/DescriptionsCard"))
 type Props = {
   params: {
@@ -38,7 +39,7 @@ const DescriptionMovie = async ({ params }: Props) => {
     );
   } else {
   
-    return <h2 className={css.h2_noFounnd}>Movie not found</h2>;
+    return (<NotFoundPage/>);
   }
 };
 

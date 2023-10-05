@@ -1,11 +1,11 @@
-import Link from 'next/link'
+import NotFoundPage from "@/components/page-not-found/NotFound"
+
 
 const NotFound = () => {
+
+  
   return (
-    <div>
-        <h2>NotFound</h2>
-        <Link href='/home'>Go Home</Link>
-    </div>
+    <NotFoundPage/>
   )
 }
 export default NotFound

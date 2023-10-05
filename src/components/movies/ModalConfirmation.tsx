@@ -17,7 +17,7 @@ export const ModalConfirmation: React.FC<ModalConfirmationProps> = ({ onClose, m
   const { movieDelete } = useUserContext();
   const router = useRouter();
 
-  const handleBack = () => {
+   const handleBack = () => {
    router.back()
   }
 

@@ -1,0 +1,32 @@
+.h2_noFounnd {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+    width: 100%;
+    height: 100%;
+    color:rgb(223, 241, 241);
+    font-size: 2rem;
+    text-align: center;
+}
+.h2_noFounnd h2 {
+    padding: 5rem;
+    width: 100%;
+    height: 100%;
+}
+.h2_noFounnd button {
+    padding: 1rem 2rem;
+}
+
+.button_span_go_back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.2rem 0;
+    gap: 5px;
+    transition: all ease-out 0.2s;
+  }
