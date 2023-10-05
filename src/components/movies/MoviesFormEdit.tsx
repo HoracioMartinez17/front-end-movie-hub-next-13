@@ -9,6 +9,7 @@ import Loader from '../loaders/Loader';
 
 interface MoviesFormEditProps {
     movieId: string;
+    onClose: () => void;
 }
 
 interface MovieCreated {
@@ -23,7 +24,7 @@ interface MovieCreated {
 
 
 
-export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId }) => {
+export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId,onClose }) => {
     const { moviesUpdate, userData } = useUserContext();
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -58,8 +59,10 @@ export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId }) => {
             if (response.status.toString() === 'success') {
                 setIsSuccess(true);
                 setTimeout(() => {
+                    onClose()
                     setIsSuccess(false);
-                }, 4000)
+
+                }, 2000)
             }
         } catch (error) {
             console.error('Error saving movie:', error);

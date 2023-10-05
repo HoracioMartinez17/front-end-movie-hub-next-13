@@ -33,10 +33,9 @@ export const getUser = async (userId: string) => {
     title: string;
     year: number;
     language: string;
-    genre?: string;
+    genre: string;
     description: string;
     image: {
-      public_id?: string | undefined;
       secure_url: string;
     }
   

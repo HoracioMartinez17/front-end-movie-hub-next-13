@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import css from './userForms.module.css'
 import { useUserContext } from '../../context/userContext';
+import Loader from '../loaders/Loader';
+import { AlertMessageSuccess } from '../alertMessageSuccess/AlertMessageSuccess';
+import { useState } from 'react';
 
 
 
@@ -8,9 +11,14 @@ interface userUpdate {
     name: string;
     email: string;
 }
+interface MoviesFormEditProps {
+  onClose: () => void;
+}
 
-export const UserForms = () => {
+export const UserForms:React.FC<MoviesFormEditProps>  = ({onClose}) => {
     const { updateUsersData, userData } = useUserContext();
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const form = useForm<userUpdate>({
         defaultValues: {
@@ -23,14 +31,29 @@ export const UserForms = () => {
 
     const onSubmit = async (userUpdate: userUpdate) => {
       try {
-         updateUsersData(userData?.id ?? '', userUpdate);
+        setIsLoading(true);
+        const response = await updateUsersData(userData?.id ?? '', userUpdate);
+         if (response.status.toString() === 'success') {
+          setIsSuccess(true);
+          setTimeout(() => {
+              onClose()
+              setIsSuccess(false);
+          }, 2000)
+      }
 
       } catch (error) {
-        console.log(error);
-      }
+        console.error(error);
+      }finally {
+        setIsLoading(false);
+    }
     }
 
     return (
+      <>
+        {isLoading && <Loader />}
+                {isSuccess && <AlertMessageSuccess>
+                  Successful data editing!
+                </AlertMessageSuccess>}
         <form className={css.form_user} onSubmit={handleSubmit(onSubmit)}>
             <div className={css.flex}>
             <div className={`${css.login} ${css.color}`}>EDIT USER</div>
@@ -60,5 +83,6 @@ export const UserForms = () => {
 
             </div>
         </form>
+      </>
       );
         }

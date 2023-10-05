@@ -4,7 +4,6 @@ import { USER_URL } from '@/global/serverUrl';
 
 
 const LoginPage= () => {
-  console.log(USER_URL)
   return (
    <Login/>
   )

@@ -1,0 +1,9 @@
+.h2_noFounnd {
+    display: flex;
+    color:rgb(223, 241, 241);
+    font-size: 2rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+}

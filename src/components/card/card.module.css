@@ -88,15 +88,16 @@
 }
 
 
-.button_span_deleteMovie {
+.button_moreInformation {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgb(255, 235, 205);
   font-weight: 600;
   gap: 5px;
-  padding: .2rem 0;
+  padding: 0.2rem 0;
   transition: all ease-out 0.2s;
- }
+}
 
 
  .button_span_addMovie {

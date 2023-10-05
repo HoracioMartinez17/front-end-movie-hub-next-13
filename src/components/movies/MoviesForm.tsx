@@ -2,10 +2,10 @@ import css from './moviesForm.module.css';
 
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { Loader } from '../loaders/Loader';
 import { AlertMessageSuccess } from '../alertMessageSuccess/AlertMessageSuccess';
 import { revalidateTag } from 'next/cache';
 import { useUserContext } from '@/context/userContext';
+import Loader from '../loaders/Loader';
 
 
 interface MovieCreated {
@@ -18,8 +18,10 @@ interface MovieCreated {
     image: string;
 }
 
-
-export const MoviesForm = () => {
+interface MoviesFormEditProps {
+    onClose: () => void;
+}
+export const MoviesForm: React.FC<MoviesFormEditProps> = ({onClose}) => {
     const { userData, moviesSave } = useUserContext();
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -53,10 +55,10 @@ export const MoviesForm = () => {
 
             if (response.status.toString() === 'success') {
                 setIsSuccess(true);
-                 revalidateTag("movies")
                 setTimeout(() => {
+                    onClose()
                     setIsSuccess(false);
-                }, 4000)
+                }, 2000)
             }
         } catch (error) {
             console.error('Error saving movie:', error);

@@ -40,10 +40,10 @@ const HeaderContent = () => {
   return (
     <>
       <Modal isOpen={isOpenModal1} closeModal={closeModal1}>
-        <MoviesForm />
+        <MoviesForm  onClose={closeModal1}/>
       </Modal>
       <Modal isOpen={isOpenModal3} closeModal={closeModal3}>
-        <UserForms />
+        <UserForms onClose={closeModal3}/>
       </Modal>
       <Modal isOpen={isOpenModal4} closeModal={closeModal4}>
         <UserFormDelete onClose={closeModal4} />

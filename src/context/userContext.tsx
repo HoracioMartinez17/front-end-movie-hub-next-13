@@ -67,8 +67,7 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
   const userCreate = async (user: UserProfile | undefined) => {
     try {
       if (user) {
-      const userResponse = await createUserApi(user);
-      console.log(userResponse)
+      const userResponse = await createUserApi(user)
       setUserData(userResponse.user)
       }
     }catch (error) {
@@ -85,7 +84,6 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
 
       const moviesByGenre = await fetchAllMoviesByGenres(genres, userId);
 
-      console.log(moviesByGenre)
       setAllMovies({ allMovies: moviesByGenre });
     } catch (error) {
       console.error('Error fetching movies by genres:', error);

@@ -1,6 +1,9 @@
 import React from 'react';
 import css from './modalConfirmation.module.css';
 import { useUserContext } from '@/context/userContext';
+import {useRouter} from 'next/navigation';
+
+
 
 
 
@@ -12,6 +15,11 @@ interface ModalConfirmationProps {
 
 export const ModalConfirmation: React.FC<ModalConfirmationProps> = ({ onClose, movieId }) => {
   const { movieDelete } = useUserContext();
+  const router = useRouter();
+
+  const handleBack = () => {
+   router.back()
+  }
 
 
   const handleDelete = () => {
@@ -19,6 +27,7 @@ export const ModalConfirmation: React.FC<ModalConfirmationProps> = ({ onClose, m
 
       movieDelete(movieId)
       onClose()
+      handleBack()
 
     } catch (error) {
       console.error('Error delete movie:', error);
