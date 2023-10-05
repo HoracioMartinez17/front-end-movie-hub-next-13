@@ -1,8 +1,8 @@
 'use client'
-import { createUserApi, deleteMoviesUser, deleteUserById, putUpdateUsers, savetMoviesUser, updateMoviesUser } from '@/actions/users.action';
+import { createUserApi, deleteMoviesUser, deleteUserById, fetchAllMoviesByGenres, putUpdateUsers, savetMoviesUser, updateMoviesUser } from '@/actions/users.action';
 import { createContext, useContext, useState, ReactNode, FC } from 'react';
 import { UserProfile } from "@auth0/nextjs-auth0/client"
-import { fetchAllMoviesByGenres } from '@/server/user.servers';
+
 
 
 interface UserData {
@@ -23,10 +23,10 @@ interface Movie {
   language: string;
   genre?: string;
   description: string;
- image: {
-  public_id?: string | undefined;
-  secure_url: string;
- }
+  image: {
+    public_id?: string | undefined;
+    secure_url: string;
+  }
 
 }
 
@@ -37,28 +37,26 @@ interface allMoviesByGenres {
   };
 }
 interface UserContextType {
-  userData: UserData | null
+  userData: UserData | undefined
   updateUser: userUpdate | null
   allMovies: allMoviesByGenres | null
   movies: Response | null
-  movieUpdate:  Response | null
+  movieUpdate: Response | null
   moviesDelete: Response | null
-  userCreate: (user: UserProfile | undefined) => void;
-  fetchUserMoviesByGenres: (genres: string[], userId: string) => void;
-  moviesSave: ( userId: string ,newMovieData: FormData) => Promise<Response>
-  moviesUpdate: (movieId: string, movieUpdate:FormData) => Promise<Response>
-  movieDelete: (movieId: string) => void
-  updateUsersData: (userId: string, userUpdate: userUpdate) => void
-  deleteUsersData: (userId: string) => Promise<Response>;
+  userCreate: (user: UserProfile | undefined) =>  void;
+  updateUsersData: (userId: string, userUpdate: userUpdate) =>  Promise<Response>
+  deleteUsersData: (userId: string) =>  Promise<Response>;
+  moviesSave: (userId: string, newMovieData: FormData) =>  Promise<Response>
+  moviesUpdate: (movieId: string, movieUpdate: FormData) =>  Promise<Response>
+  movieDelete: (movieId: string) =>  Promise<Response>
+  fetchUserMoviesByGenres: (genres: string[], userId: string) =>  void;
 }
-
-
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 
 export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<UserData | undefined>(undefined);
   const [allMovies, setAllMovies] = useState<allMoviesByGenres | null>(null);
   const [movies, setNewMovies] = useState<Response | null>(null);
   const [updateUser, setupdateUser] = useState<userUpdate | null>(null);
@@ -67,12 +65,20 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
 
 
   const userCreate = async (user: UserProfile | undefined) => {
-    if (user) {
+    try {
+      if (user) {
       const userResponse = await createUserApi(user);
-      console.log (userResponse)
-      setUserData(userResponse.user);
+      console.log(userResponse)
+      setUserData(userResponse.user)
+      }
+    }catch (error) {
+      console.error('Error saving user:', error);
+      throw error;
     }
+
   };
+
+ 
 
   const fetchUserMoviesByGenres = async (genres: string[], userId: string) => {
     try {
@@ -83,6 +89,7 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
       setAllMovies({ allMovies: moviesByGenre });
     } catch (error) {
       console.error('Error fetching movies by genres:', error);
+      throw error
     }
   };
 
@@ -90,8 +97,7 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
     try {
       const newMovieCreated = await savetMoviesUser(userId, newMovieData);
       setNewMovies(newMovieCreated);
-      console.log(newMovieCreated)
-      return newMovieCreated;
+      return newMovieCreated
     } catch (error) {
       console.error('Error saving movie:', error);
       throw error;
@@ -102,7 +108,6 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
     try {
 
       const newMovieUpdate = await updateMoviesUser(movieId, updateMovieData);
-
       setMovieUpdate(newMovieUpdate);
       return newMovieUpdate
     } catch (error) {
@@ -110,51 +115,43 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
       throw error;
     }
   }
-  const movieDelete = async (movieId: string) => {
+  const movieDelete = async (movieId: string): Promise<Response> => {
     try {
       const response = await deleteMoviesUser(movieId);
-        setMovieDelete(response);
+      setMovieDelete(response);
+      return response
+
     } catch (error) {
       console.error('Error delete movie:', error);
+      throw error
     }
   };
 
-  const updateUsersData = async (userId: string, userUpdate: userUpdate) => {
+  const updateUsersData = async (userId: string, userUpdate: userUpdate): Promise<Response> => {
     try {
-      // Update user data on the server
-     const response = await putUpdateUsers(userId, userUpdate);
-     setupdateUser(response);
-      // No response to update state with
+
+      const response = await putUpdateUsers(userId, userUpdate);
+      setupdateUser(response);
+      return response
     } catch (error) {
       console.error('Error updating user:', error);
+      throw error
     }
   }
   const deleteUsersData = async (userId: string): Promise<Response> => {
     try {
-      // delete user data on the server
       const response = await deleteUserById(userId);
-      return response;
+      return response
     } catch (error) {
       console.error('Error delete user:', error);
       throw error;
     }
   }
-  // cons = async (id: string): Promise<Response> => {
-  //   try {
-  //     // delete user data on the server
-  //     const response = await deleteUserByAuth0(id);
-  //     return response;
-  //   } catch (error) {
-  //     console.error('Error delete user:', error);
-  //     throw error;
-  //   }
-  // }
 
-
-   return (
+  return (
     <UserContext.Provider value={{
       allMovies, userData, movies, movieUpdate, moviesDelete, userCreate,
-      fetchUserMoviesByGenres,updateUser, moviesSave, moviesUpdate, movieDelete, updateUsersData,
+      fetchUserMoviesByGenres, updateUser, moviesSave, moviesUpdate, movieDelete, updateUsersData,
       deleteUsersData
     }}>
       {children}
@@ -169,5 +166,4 @@ export const useUserContext = (): UserContextType => {
   }
   return context;
 };
-
 

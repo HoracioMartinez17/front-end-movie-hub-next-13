@@ -1,10 +1,12 @@
-'use client' 
- import css from './moviesForm.module.css';
-import { useUserContext } from '../../context/userContext';
+import css from './moviesForm.module.css';
+
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { Loader } from '../loaders/Loader';
 import { AlertMessageSuccess } from '../alertMessageSuccess/AlertMessageSuccess';
+import { revalidateTag } from 'next/cache';
+import { useUserContext } from '@/context/userContext';
+
 
 interface MovieCreated {
     id?: string;
@@ -51,6 +53,7 @@ export const MoviesForm = () => {
 
             if (response.status.toString() === 'success') {
                 setIsSuccess(true);
+                 revalidateTag("movies")
                 setTimeout(() => {
                     setIsSuccess(false);
                 }, 4000)

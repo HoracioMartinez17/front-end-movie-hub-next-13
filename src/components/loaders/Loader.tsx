@@ -1,6 +1,6 @@
 import css from './loader.module.css'
 
-export const Loader = () => {
+ const Loader = () => {
   return (
     <div className={css.spinner}>
   <span></span>
@@ -10,3 +10,4 @@ export const Loader = () => {
 </div>
   )
 }
+export default Loader

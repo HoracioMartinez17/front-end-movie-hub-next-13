@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { useEffect, useState } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client';
 import css from './header.module.css'
@@ -7,11 +7,12 @@ import { useModal } from '@/hooks/useModal'
 import Modal from '../modal/Modal'
 import { ButtonSpecial } from '../button/buttonSpecial/ButtonSpecial'
 import { DropdownMenu } from '../dropdownMenu/DropdownMenu'
-import { Loader } from '../loaders/Loader';
-import { useUserContext } from '@/context/userContext'
 import { MoviesForm } from '../movies/MoviesForm';
 import { UserForms } from '../useForms/UserForms';
 import { UserFormDelete } from '../useForms/UserFormDelete';
+import { useUserContext } from '@/context/userContext';
+import Loader from '../loaders/Loader';
+
 
 
 const HeaderContent = () => {
@@ -19,11 +20,11 @@ const HeaderContent = () => {
     const [isOpenModal3, openModal3, closeModal3] = useModal(false)
     const [isOpenModal4, openModal4, closeModal4] = useModal(false)
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-     const { userCreate,userData } = useUserContext();
+     const { userCreate,userData,updateUser } = useUserContext();
     const { user, error, isLoading } = useUser();
     useEffect(() => {
       userCreate(user);
-    }, [user]);
+    }, [user,updateUser]);
 
     if (isLoading) return <Loader/>;
     if (error) return <div>{error.message}</div>;

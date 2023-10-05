@@ -1,7 +1,8 @@
-import { useUserContext } from '../../context/userContext';
 import css from './userFormDelete.module.css'
 import { FC } from 'react';
 import { redirect } from 'next/navigation'
+import { useUserContext } from '@/context/userContext';
+
 
 interface ModalConfirmationProps {
     onClose: () => void;

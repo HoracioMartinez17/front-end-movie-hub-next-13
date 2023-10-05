@@ -9,8 +9,15 @@
         "ignore": [
           "backdrop-filter",
           "-webkit-text-size-adjust",
-          "font-synthesis"
+          "font-synthesis",
+          "width: fit-content"
         ]
+      }
+    ],
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
       }
     ]
   }

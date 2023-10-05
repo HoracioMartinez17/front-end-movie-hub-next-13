@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import css from './buttonComponent.module.css';
 
 interface IconButtonProps {
-    onClick: () => void;
+    onClick?: () => void;
     className?: string;
     children: ReactNode;
     backgroundColor?: 'greenBackground' | 'redBackground' |'blackBackground';

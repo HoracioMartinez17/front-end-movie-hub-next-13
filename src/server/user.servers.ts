@@ -1,12 +1,7 @@
-import { GENRES_URL,USER_URL } from "@/global/serverUrl";
+import { USER_URL,MOVIES_URL } from "@/global/serverUrl";
 import {getAccessToken} from "@auth0/nextjs-auth0";
 
-interface UserData {
-    id: string;
-    name: string;
-    email: string;
-    movies: Movie[];
-  }
+
 
 export const getUser = async (userId: string) => {
     try {
@@ -24,47 +19,42 @@ export const getUser = async (userId: string) => {
         throw new Error("Network response was not ok.");
       }
       if(response.ok){
-        return await response.json() as UserData[]
+        const data = await response.json()
+        return data
       }
 
     } catch (error) {
       console.error("There was a problem with the request:", error);
     }
   };
+
   interface Movie {
     id: string;
     title: string;
     year: number;
     language: string;
+    genre?: string;
     description: string;
-   image: {
-    public_id?: string | undefined;
-    secure_url: string;
-   }
+    image: {
+      public_id?: string | undefined;
+      secure_url: string;
+    }
+  
   }
-  interface GenreMovies {
-    [genre: string]: Movie[];
-  }
-
-  export const fetchAllMoviesByGenres = async (genres: string[], userId: string) => {
-    const allMovies: GenreMovies = {};
+export const getMoviesByMovieId = async (movieId: string) => {
     try {
-      for (const genre of genres) {
-        const token = await getAccessToken();
-        const response = await fetch(`${GENRES_URL}/${genre}/${userId}`,
-          {
-            method: "GET", headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`
-            },
-            next: {tags: ["movies"]}
-          });
-        const data = await response.json();
-        allMovies[genre] = data.movies;
-      }
-      return allMovies;
+      const token = await getAccessToken();
+      const response = await fetch(`${MOVIES_URL}/${movieId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const {movie} = await response.json()
+        return movie as Movie
+
     } catch (error) {
-      console.error('Error fetching movies by genres:', error);
-      return {};
+      console.error("There was a problem with the request:", error);
     }
   };

@@ -7,7 +7,7 @@ import { useUserContext } from '@/context/userContext'
 
 
 const MoviesListContainer = () => {
-    const { userData,allMovies,movieUpdate,moviesDelete, fetchUserMoviesByGenres } = useUserContext();
+    const { userData,allMovies,movieUpdate,moviesDelete,movies, fetchUserMoviesByGenres } = useUserContext();
 	const { horror, action, comedy } = allMovies?.allMovies || {};
 
 	useEffect(() => {
@@ -15,7 +15,7 @@ const MoviesListContainer = () => {
 		fetchUserMoviesByGenres(['horror', 'action', 'comedy'], userData.id);
 	}
 
-	},[userData,movieUpdate,moviesDelete]);
+	},[userData,movieUpdate,moviesDelete,movies]);
   return (
     <>
 			<section className={`${css.movies} ${css.container}`}>
@@ -24,7 +24,7 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_1}>
 				{horror?.map((movie) => (
                         <div key={movie.id} className={css.box1}>
-                            <Card id={movie.id} title={movie.title} year={movie.year}
+                            <Card movieId={movie.id} title={movie.title} year={movie.year}
 							language={movie.language} description={movie.description} image={movie.image}/>
                         </div>
                     ))}
@@ -38,7 +38,7 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_2}>
 				{action?.map((movie) => (
                         <div key={movie.id} className={css.box2}>
-                           <Card id={movie.id} title={movie.title} year={movie.year}
+                           <Card movieId={movie.id} title={movie.title} year={movie.year}
 							language={movie.language} description={movie.description} image={movie.image}/>
                         </div>
                     ))}
@@ -52,7 +52,7 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_3}>
 				{comedy?.map((movie) => (
                         <div key={movie.id} className={css.box3}>
-                           <Card id={movie.id} title={movie.title} year={movie.year}
+                           <Card movieId={movie.id} title={movie.title} year={movie.year}
 							language={movie.language} description={movie.description} image={movie.image}/>
                         </div>
                     ))}
