@@ -24,8 +24,8 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_1}>
 				{horror?.map((movie) => (
                         <div key={movie.id} className={css.box1}>
-                            <Card movieId={movie.id} title={movie.title} year={movie.year}
-							language={movie.language} description={movie.description} image={movie.image}/>
+                            <Card movieId={movie.id} title={movie.title}
+							image={movie.image}/>
                         </div>
                     ))}
 				</div>
@@ -38,8 +38,8 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_2}>
 				{action?.map((movie) => (
                         <div key={movie.id} className={css.box2}>
-                           <Card movieId={movie.id} title={movie.title} year={movie.year}
-							language={movie.language} description={movie.description} image={movie.image}/>
+                           <Card movieId={movie.id} title={movie.title}
+							image={movie.image}/>
                         </div>
                     ))}
 				</div>
@@ -52,8 +52,8 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_3}>
 				{comedy?.map((movie) => (
                         <div key={movie.id} className={css.box3}>
-                           <Card movieId={movie.id} title={movie.title} year={movie.year}
-							language={movie.language} description={movie.description} image={movie.image}/>
+                           <Card movieId={movie.id} title={movie.title}
+							image={movie.image}/>
                         </div>
                     ))}
 				</div>
