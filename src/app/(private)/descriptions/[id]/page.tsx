@@ -28,7 +28,7 @@ const DescriptionMovie = async ({ params }: Props) => {
   if (movie) {
     return (
       <>
-          <Suspense fallback={<LoadingSkeleton/>}>
+       
         <DescriptionsCard
           title={movie.title}
           year={movie.year}
@@ -37,7 +37,7 @@ const DescriptionMovie = async ({ params }: Props) => {
           imageUrl={movie.imageUrl}
           movieId={movieId}
         />
-        </Suspense>
+    
       </>
     );
   } else {
