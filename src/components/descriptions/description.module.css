@@ -82,7 +82,6 @@
     font-weight: 700;
     color:  #ff3838;
     margin-bottom: 10px;
-    margin-top: 1rem;
     padding: 1rem;
   }
   .description_parrafo_date_description{
@@ -91,7 +90,6 @@
     font-weight: 700;
     color:  #ff3838;
     margin-bottom: 20px;
-    margin-top: 1rem;
     padding: 1rem;
 
   }
@@ -102,17 +100,20 @@
     font-weight: 500;
  
   }
-  
+  .div_button_description {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   
   .button_divCard{
-    position: absolute;
-    top: 23rem;
-    right: 3rem;
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
+
+    margin-right: 1.5rem;
     gap: 1rem;
     height: 50%;
-  
   }
   
   
@@ -145,5 +146,72 @@
     padding: 0.2rem 0;
     gap: 5px;
     transition: all ease-out 0.2s;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      margin: 2rem auto;
+    }
+  
+.descriptionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px 0px;
+  border: 2px solid hsla(0, 23%, 22%, 0.584);
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, .5);
+  background-color: #1a1a1a;
+  border-radius:0;
+ transition: all .2s;
+
+
+}
+  
+    .descriptionContainer:hover {
+      transform: scale(0.98);
+    }
+  
+    .img_container {
+      object-fit: contain;
+    }
+    .card_img{
+      width: 100%;
+     object-fit: cover;
+     display: block;
+    }
+
+    .div_lenguage_year {
+      display: flex;
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      padding: 0;
+    }
+  .button_divCard {
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+  }
+    .title {
+      font-size: 3rem;
+      padding: 1rem 0;
+      text-align: center;
+    }
+  
+    .description_parrafo,
+    .description_parrafo_date,
+    .description_parrafo_date_description,
+    .description_span_date {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      margin-bottom: 0;
+      padding: 1rem;
+    }
+  
+  
+    .button_span_deleteMovie,
+    .button_span_addMovie,
+    .button_span_go_back {
+      font-size: 1rem;
+      padding: 0.2rem 0;
+    }
   }
   

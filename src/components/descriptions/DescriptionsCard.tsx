@@ -40,15 +40,19 @@ const DescriptionsCard: React.FC<Movie> = async ({ ...props }:Movie) => {
                     </div>
                     <div className={css.information_container}>
                         <h2 className={css.title}>{props.title}</h2>
+                        <div className={css.div_lenguage_year}>
                         <p className={css.description_parrafo_date}>Language:
                             <span className={css.description_span_date}>
                                 {props.language}</span></p>
                         <p className={css.description_parrafo_date}>Year:
                             <span className={css.description_span_date}>
                                 {props.year}</span></p>
+
+                        </div>
+                        <div className={css.div_button_description}>
                         <p className={css.description_parrafo_date_description}>Description:<span className={css.description_parrafo}>
                             {props.description}</span></p>
-                        <div className={css.button_divCard}>
+                            <div className={css.button_divCard}>
                             <ButtonComponent onClick={() => router.back()} button_hover="button_hover_green" backgroundColor="blackBackground"
                                 textSize="largeText" className={css.buttonClasses}>
                                 <Link className={css.button_span_go_back}
@@ -77,6 +81,7 @@ const DescriptionsCard: React.FC<Movie> = async ({ ...props }:Movie) => {
                                     Delete
                                 </span>
                             </ButtonComponent>
+                            </div>
                         </div>
                     </div>
                 </div>
