@@ -32,7 +32,7 @@ const MoviesListContainer = () => {
 					))}
 					{horror?.length === 0 && (
 						<div className={css.box1}>
-							<p className={css.p_movie_empty}>You don't have any horror movies created😞</p>
+							<p className={css.p_movie_empty}>You don't have any horror movies saved😢</p>
 						</div>
 					)}
 				</div>
@@ -54,7 +54,7 @@ const MoviesListContainer = () => {
 					))}
 					{action?.length === 0 && (
 						<div className={css.box2}>
-							<p className={css.p_movie_empty}>You don't have any action movies created😞</p>
+							<p className={css.p_movie_empty}>You don't have any action movies saved😢</p>
 						</div>
 					)}
 				</div>
@@ -74,7 +74,7 @@ const MoviesListContainer = () => {
 					))}
 					{comedy?.length === 0 && (
 						<div className={css.box3}>
-							<p className={css.p_movie_empty}>You don't have any comedy movies created😞</p>
+							<p className={css.p_movie_empty}>You don't have any comedy movies saved😢</p>
 						</div>
 					)}
 				</div>
