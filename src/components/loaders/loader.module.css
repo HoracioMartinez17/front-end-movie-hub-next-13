@@ -1,7 +1,9 @@
 .spinner {
     position: fixed;
-    top: 2rem;
-    left: 61rem;
+    position: fixed;
+    top: 15%; /* Centra verticalmente */
+     left: 50%; /* Centra horizontalmente */
+     transform: translate(-50%, -50%); /* Ajusta el centro */
     --gap: 5px;
     --clr: #d62d20;
     --height: 23px;
@@ -12,7 +14,7 @@
     justify-content: center;
     gap: var(--gap);
    }
-   
+
    .spinner span {
     background: var(--clr);
     width: 6px;

@@ -188,6 +188,7 @@
     }
   .button_divCard {
     justify-content: space-evenly;
+    margin-left: 1rem;
     margin-bottom: 1rem;
   }
     .title {
