@@ -82,7 +82,6 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
     try {
 
       const moviesByGenre = await fetchAllMoviesByGenres(genres, userId);
-console.log(moviesByGenre)
       setAllMovies({ allMovies: moviesByGenre });
     } catch (error) {
       console.error('Error fetching movies by genres:', error);
