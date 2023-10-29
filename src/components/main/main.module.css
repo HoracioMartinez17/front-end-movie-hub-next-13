@@ -15,6 +15,10 @@
     margin-bottom: 1.5rem;
     color: #f5f4e8;
 }
+.p_movie_empty {
+   font-size: 2rem;
+   color: #f5f4e8;
+}
 
 .hrMovies {
     border: 1px solid #FF2F28;

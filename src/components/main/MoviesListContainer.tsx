@@ -27,12 +27,16 @@ const MoviesListContainer = () => {
 				<div className={css.boxContainer_1}>
 					{horror?.map((movie) => (
 						<div key={movie.id} className={css.box1}>
-							<Card movieId={movie.id} title={movie.title}
-								imageUrl={movie.imageUrl}
-								image={movie.image} />
+							<Card movieId={movie.id} title={movie.title} imageUrl={movie.imageUrl} image={movie.image} />
 						</div>
 					))}
+					{horror?.length === 0 && (
+						<div className={css.box1}>
+							<p className={css.p_movie_empty}>You don't have any horror movies created😞</p>
+						</div>
+					)}
 				</div>
+
 
 				<button type="button" className={css.loadMore} id={css.loadMore1}> Load more</button>
 
@@ -48,6 +52,11 @@ const MoviesListContainer = () => {
 								image={movie.image} />
 						</div>
 					))}
+					{action?.length === 0 && (
+						<div className={css.box2}>
+							<p className={css.p_movie_empty}>You don't have any action movies created😞</p>
+						</div>
+					)}
 				</div>
 				<button type="button" className={css.loadMore} id={css.loadMore2}> Load more</button>
 
@@ -63,6 +72,11 @@ const MoviesListContainer = () => {
 								image={movie.image} />
 						</div>
 					))}
+					{comedy?.length === 0 && (
+						<div className={css.box3}>
+							<p className={css.p_movie_empty}>You don't have any comedy movies created😞</p>
+						</div>
+					)}
 				</div>
 				<button type="button" className={css.loadMore} id={css.loadMore3}> Load more</button>
 
