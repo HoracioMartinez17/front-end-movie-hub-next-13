@@ -155,10 +155,9 @@ interface Movie {
     year: number;
     language: string;
     description: string;
-   image: {
-    public_id?: string | undefined;
-    secure_url: string;
-   }
+    image: FileList | null;
+    imageUrl: string,
+    imageId: string,
   }
   interface GenreMovies {
     [genre: string]: Movie[];

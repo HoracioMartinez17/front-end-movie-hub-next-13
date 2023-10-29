@@ -33,12 +33,10 @@ export const getUser = async (userId: string) => {
     title: string;
     year: number;
     language: string;
-    genre: string;
     description: string;
-    image: {
-      secure_url: string;
-    }
-  
+    image: FileList | null;
+    imageUrl: string,
+    imageId: string,
   }
 export const getMoviesByMovieId = async (movieId: string) => {
     try {

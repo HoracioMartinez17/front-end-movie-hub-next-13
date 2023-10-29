@@ -23,10 +23,9 @@ interface Movie {
   language: string;
   genre?: string;
   description: string;
-  image: {
-    public_id?: string | undefined;
-    secure_url: string;
-  }
+  image: FileList | null;
+  imageUrl: string,
+  imageId: string,
 
 }
 
@@ -43,13 +42,13 @@ interface UserContextType {
   movies: Response | null
   movieUpdate: Response | null
   moviesDelete: Response | null
-  userCreate: (user: UserProfile | undefined) =>  void;
-  updateUsersData: (userId: string, userUpdate: userUpdate) =>  Promise<Response>
-  deleteUsersData: (userId: string) =>  Promise<Response>;
-  moviesSave: (userId: string, newMovieData: FormData) =>  Promise<Response>
-  moviesUpdate: (movieId: string, movieUpdate: FormData) =>  Promise<Response>
-  movieDelete: (movieId: string) =>  Promise<Response>
-  fetchUserMoviesByGenres: (genres: string[], userId: string) =>  void;
+  userCreate: (user: UserProfile | undefined) => void;
+  updateUsersData: (userId: string, userUpdate: userUpdate) => Promise<Response>
+  deleteUsersData: (userId: string) => Promise<Response>;
+  moviesSave: (userId: string, newMovieData: FormData) => Promise<Response>
+  moviesUpdate: (movieId: string, movieUpdate: FormData) => Promise<Response>
+  movieDelete: (movieId: string) => Promise<Response>
+  fetchUserMoviesByGenres: (genres: string[], userId: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -67,23 +66,23 @@ export const UserProviderApi: FC<{ children: ReactNode }> = ({ children }) => {
   const userCreate = async (user: UserProfile | undefined) => {
     try {
       if (user) {
-      const userResponse = await createUserApi(user)
-      setUserData(userResponse.user)
+        const userResponse = await createUserApi(user)
+        setUserData(userResponse.user)
       }
-    }catch (error) {
+    } catch (error) {
       console.error('Error saving user:', error);
       throw error;
     }
 
   };
 
- 
+
 
   const fetchUserMoviesByGenres = async (genres: string[], userId: string) => {
     try {
 
       const moviesByGenre = await fetchAllMoviesByGenres(genres, userId);
-
+console.log(moviesByGenre)
       setAllMovies({ allMovies: moviesByGenre });
     } catch (error) {
       console.error('Error fetching movies by genres:', error);

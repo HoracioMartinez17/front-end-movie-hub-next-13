@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains: ["http://localhost:8080"],
+        domains: ["res.cloudinary.com"],
+        unoptimized: true,
     },
     experimental: {
         serverActions:true,

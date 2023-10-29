@@ -6,6 +6,7 @@ import { AlertMessageSuccess } from '../alertMessageSuccess/AlertMessageSuccess'
 import { revalidateTag } from 'next/cache';
 import { useUserContext } from '@/context/userContext';
 import Loader from '../loaders/Loader';
+import { readData } from '@/utils/readData ';
 
 
 interface MovieCreated {
@@ -49,7 +50,8 @@ export const MoviesForm: React.FC<MoviesFormEditProps> = ({onClose}) => {
             formData.append('language', newMovieData.language);
             formData.append('description', newMovieData.description);
             formData.append('genre', newMovieData.genre);
-            formData.append('image', newMovieData.image[0]);
+            const imageData: any = await readData(newMovieData.image[0]);
+            formData.append('image', imageData);
 
           const response = await  moviesSave(userData?.id ?? '', formData);
 

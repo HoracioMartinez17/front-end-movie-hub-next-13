@@ -12,7 +12,7 @@ import { UserForms } from '../useForms/UserForms';
 import { UserFormDelete } from '../useForms/UserFormDelete';
 import { useUserContext } from '@/context/userContext';
 import Loader from '../loaders/Loader';
-
+import Image from 'next/image'
 
 
 const HeaderContent = () => {
@@ -26,10 +26,8 @@ const HeaderContent = () => {
       userCreate(user);
     }, [user,updateUser]);
 
-    if (isLoading) return <Loader/>;
     if (error) return <div>{error.message}</div>;
-  
-  
+
     const handleProfileHover = () => {
       setIsDropdownVisible(true);
     };
@@ -48,7 +46,7 @@ const HeaderContent = () => {
       <Modal isOpen={isOpenModal4} closeModal={closeModal4}>
         <UserFormDelete onClose={closeModal4} />
       </Modal>
-      <header className={css.header}>
+      <header className={`${css.header_background} ${isLoading ? css.loading : ''}`}>
         <div className={`${css.menu} ${css.container}`}>
           <Link className={css.logo} href='/' >Cine Max</Link>
           <input type="checkbox" id={css.menu} />
@@ -81,7 +79,7 @@ const HeaderContent = () => {
               >
                 <span className={css.navItem_span}><svg className={css.svg_profile} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                </svg>{userData?.name}</span>
+                </svg>{isLoading ? <Loader/> : userData?.name}</span>
                 <ul className={`${css.ul_second} ${isDropdownVisible ? css.visible : ''}`}>
                   {isDropdownVisible && <DropdownMenu isDropdownVisible={isDropdownVisible}
                    openModal3={openModal3}  openModal4={openModal4} />}
@@ -92,7 +90,12 @@ const HeaderContent = () => {
         </div>
         <div className={`${css.header_content} ${css.container}`}>
           <div className={css.header1}>
-            <img src='assets/venom.png' alt="Venom imagen" />
+            <Image src='/assets/venom.png' alt="Venom imagen"
+            placeholder="blur"
+            blurDataURL='/assets/venom.png'
+            width={300}
+            height={300}
+            priority/>
           </div>
           <div className={css.header2}>
             <h1>The best <hr /> Movies </h1>

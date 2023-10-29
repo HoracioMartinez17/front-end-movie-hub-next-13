@@ -5,17 +5,27 @@
     padding: 1rem;
 }
 
-.header {
+.header_background {
     background-image: url('/assets/bg.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     min-height: 70vh;
+    filter: blur(10px);
     display: flex;
     align-items: center;
     position: relative;
 }
 
+.header_background.loading {
+    filter: blur(10px); /* Mantén el efecto de desenfoque mientras se carga */
+    transition: filter 0.5s; /* Agrega una transición suave para el filtro */
+  }
+  
+  /* Elimina el efecto de desenfoque cuando isLoading sea falso */
+  .header_background:not(.loading) {
+    filter: none;
+  }
 .menu {
     position: absolute;
     top: 0;
@@ -129,7 +139,9 @@
 }
 
 .header1 img {
+    object-fit: fill;
     width: 300px;
+    height: 180px;
 }
 
 

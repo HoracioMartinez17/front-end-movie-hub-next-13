@@ -15,41 +15,43 @@ interface Movie {
     year: number;
     language: string;
     description: string;
-    image: string;
+    image?: FileList | null;
+    imageId?: string;
+    imageUrl: string;
 }
 
-const DescriptionsCard: React.FC<Movie> = async ({ description, image, language, title, year, movieId }) => {
+const DescriptionsCard: React.FC<Movie> = async ({ ...props }:Movie) => {
     const [isOpenModalDelete, openModalDelte, closeModalDelete] = useModal(false)
     const [isOpenModalEdit, openModalEdit, closeModalEdit] = useModal(false)
     const router = useRouter();
     return (
         <>
             <Modal isOpen={isOpenModalEdit} closeModal={closeModalEdit}>
-                <MoviesFormEdit movieId={movieId ?? ''} onClose={closeModalEdit}/>
+                <MoviesFormEdit movieId={props.movieId ?? ''} onClose={closeModalEdit}/>
             </Modal>
             <Modal isOpen={isOpenModalDelete} closeModal={closeModalDelete}>
-                <ModalConfirmation movieId={movieId ?? ''} onClose={closeModalDelete} />
+                <ModalConfirmation movieId={props.movieId ?? ''} onClose={closeModalDelete} />
             </Modal>
             <section className={css.container}>
                 <div className={css.descriptionContainer}>
                     <div className={css.img_container}>
-                        <img className={css.card_img} src={image} alt="card img" />
+                        <img className={css.card_img} src={props.imageUrl} alt="card img" />
                     </div>
                     <div className={css.information_container}>
-                        <h2 className={css.title}>{title}</h2>
+                        <h2 className={css.title}>{props.title}</h2>
                         <p className={css.description_parrafo_date}>Language:
                             <span className={css.description_span_date}>
-                                {language}</span></p>
+                                {props.language}</span></p>
                         <p className={css.description_parrafo_date}>Year:
                             <span className={css.description_span_date}>
-                                {year}</span></p>
+                                {props.year}</span></p>
                         <p className={css.description_parrafo_date_description}>Description:<span className={css.description_parrafo}>
-                            {description}</span></p>
+                            {props.description}</span></p>
                         <div className={css.button_divCard}>
                             <ButtonComponent onClick={() => router.back()} button_hover="button_hover_green" backgroundColor="blackBackground"
                                 textSize="largeText" className={css.buttonClasses}>
                                 <Link className={css.button_span_go_back}
-                                    href={`http://localhost:3000/descriptions/${movieId}`}>
+                                    href={`http://localhost:3000/descriptions/${props.movieId}`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z" />
                                     </svg>

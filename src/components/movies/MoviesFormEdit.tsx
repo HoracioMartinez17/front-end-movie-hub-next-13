@@ -6,6 +6,7 @@ import { AlertMessageSuccess } from '../alertMessageSuccess/AlertMessageSuccess'
 import { useState } from 'react';
 import { useUserContext } from '@/context/userContext';
 import Loader from '../loaders/Loader';
+import { readData } from '@/utils/readData ';
 
 interface MoviesFormEditProps {
     movieId: string;
@@ -38,7 +39,7 @@ export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId,onClose 
             language: movieToEdit?.language || '',
             genre: movieToEdit?.genre || '',
             description: movieToEdit?.description || '',
-            image: movieToEdit?.image.secure_url || '',
+            image: movieToEdit?.imageUrl || '',
         },
     })
     const { register, handleSubmit, formState } = form
@@ -54,7 +55,8 @@ export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId,onClose 
             formData.append('language', updateMovieData.language);
             formData.append('description', updateMovieData.description);
             formData.append('genre', updateMovieData.genre);
-            formData.append('image', updateMovieData.image[0]);
+            const imageData: any = await readData(updateMovieData.image[0]);
+            formData.append('image', imageData);
             const response = await moviesUpdate(movieId, formData);
             if (response.status.toString() === 'success') {
                 setIsSuccess(true);
@@ -151,7 +153,6 @@ export const MoviesFormEdit: React.FC<MoviesFormEditProps> = ({ movieId,onClose 
                             id='image'
                             type='file'
                         />
-                        {errors.image && <span className={css.error_input}>{errors.image.message}</span>}
                     </div>
                     <button type="submit">Edit Movie</button>
                 </form>

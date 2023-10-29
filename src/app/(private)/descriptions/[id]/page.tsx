@@ -5,6 +5,7 @@ import css from './descriptionPage.module.css'
 import {Suspense} from "react";
 import dynamic from "next/dynamic";
 import NotFoundPage from '@/components/page-not-found/NotFound';
+import LoadingSkeleton from '@/components/loaders/LoadingSkeleton';
 const CharacterList = dynamic(() => import ("@/components/descriptions/DescriptionsCard"))
 type Props = {
   params: {
@@ -27,14 +28,16 @@ const DescriptionMovie = async ({ params }: Props) => {
   if (movie) {
     return (
       <>
+          <Suspense fallback={<LoadingSkeleton/>}>
         <DescriptionsCard
           title={movie.title}
           year={movie.year}
           language={movie.language}
           description={movie.description}
-          image={movie.image.secure_url}
+          imageUrl={movie.imageUrl}
           movieId={movieId}
         />
+        </Suspense>
       </>
     );
   } else {
