@@ -18,6 +18,7 @@ export const ModalConfirmation: React.FC<ModalConfirmationProps> = ({ onClose, m
   const router = useRouter();
 
    const handleBack = () => {
+   router.refresh()
    router.back()
   }
 
